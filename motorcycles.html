@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SellandBuy.com - Motorcycles</title>
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #4f46e5;
+      --accent-color: #dc2626;
+      --dark-bg: #0f172a;
+      --light-bg: #f8fafc;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background-color: var(--light-bg);
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar h1 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .navbar nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    .search-filter {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      padding: 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-filter input,
+    .search-filter select {
+      padding: 0.7rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      flex: 1;
+    }
+
+    .ads {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .ad {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      border: 1px solid #f1f5f9;
+      transition: transform 0.3s ease;
+    }
+
+    .ad:hover {
+      transform: translateY(-5px);
+    }
+
+    .ad img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .ad h3 {
+      color: var(--dark-bg);
+      margin-top: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .ad p {
+      color: #28a745;
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      font-weight: bold;
+    }
+
+    .contact-seller {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .contact-seller:hover {
+      opacity: 0.9;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .close-modal {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        text-align: center;
+      }
+      .navbar nav {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>SellandBuy.com</h1>
+    <nav>
+           <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/Homesite.html">Homesite</a>      
+          <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/sell.html">sell</a>
+        <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/anout%20us%20.html">About Us</a>
+         <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/contact%20us.html">Contact Us</a>
+
+    </nav>
+  </div>
+
+  <div class="search-filter">
+    <input type="text" placeholder="Search for bikes..." id="searchInput" oninput="filterAds()">
+    <select id="priceFilter" onchange="filterAds()">
+      <option value="">All Prices</option>
+      <option value="100000">Below ₹1,00,000</option>
+      <option value="300000">₹1,00,000 - ₹3,00,000</option>
+      <option value="999999">Above ₹3,00,000</option>
+    </select>
+  </div>
+
+  <div class="ads" id="adsContainer">
+    <!-- Ads will load here via JS -->
+  </div>
+
+  <!-- Contact Seller Modal -->
+  <div class="modal" id="contactModal">
+    <div class="modal-content">
+      <h2>Contact Seller</h2>
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button class="close-modal" onclick="closeModal()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const ads = [
+      {
+        title: "Sport Bike",
+        price: 150000,
+        image: "https://financialexpresswpcontent.s3.amazonaws.com/uploads/2021/03/ktm-620x413.jpg"
+      },
+      {
+        title: "Harley Davidson",
+        price: 800000,
+        image: "https://s3.ap-south-1.amazonaws.com/fdpayments/1690022129957-blob"
+      },
+      {
+        title: "Cruiser Bike",
+        price: 250000,
+        image: "https://apollo.olx.in/v1/files/eoxl3ryp7wsl1-ADVIN/image"
+      },
+      {
+        title: "Dirt Bike",
+        price: 120000,
+        image: "https://offroadvietnam.com/media/honda-xr250l-dual-enduro-used-motorbike-for-sale-hanoi-vietnam-right.jpg"
+      },
+      {
+        title: "Bike",
+        price: 60000,
+        image: "https://www.financialexpress.com/wp-content/uploads/2020/05/credr.jpg"
+      },
+      {
+        title: "Touring Bike",
+        price: 300000,
+        image: "https://www.motorcycletourer.com/wp-content/uploads/2022/10/second-hand-bike-for-touring-7-1024x683.jpg"
+      }
+    ];
+
+    function renderAds(filteredAds = ads) {
+      const container = document.getElementById('adsContainer');
+      container.innerHTML = '';
+      filteredAds.forEach(ad => {
+        container.innerHTML += `
+          <div class="ad">
+            <img src="${ad.image}" alt="${ad.title}">
+            <h3>${ad.title}</h3>
+            <p>Price: ₹${ad.price.toLocaleString()}</p>
+            <button class="contact-seller" onclick="openModal()">Contact Seller</button>
+          </div>
+        `;
+      });
+    }
+
+    function filterAds() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const price = document.getElementById('priceFilter').value;
+      const filtered = ads.filter(ad => {
+        const matchesSearch = ad.title.toLowerCase().includes(search);
+        const matchesPrice = !price || (price == 100000 && ad.price < 100000)
+          || (price == 300000 && ad.price >= 100000 && ad.price <= 300000)
+          || (price == 999999 && ad.price > 300000);
+        return matchesSearch && matchesPrice;
+      });
+      renderAds(filtered);
+    }
+
+    function openModal() {
+      document.getElementById("contactModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("contactModal").style.display = "none";
+    }
+
+    renderAds(); // Initial render
+  </script>
+</body>
+</html>

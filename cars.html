@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SellandBuy.com - Cars</title>
+  <style>
+    :root {
+      --primary: #1d4ed8;
+      --secondary: #3b82f6;
+      --accent: #dc2626;
+      --bg-light: #f8fafc;
+      --bg-dark: #0f172a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: var(--bg-light);
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .filters {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1rem auto;
+      max-width: 900px;
+    }
+
+    .filters input, .filters select {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .ads {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .ad {
+      background: white;
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+      text-align: center;
+    }
+
+    .ad:hover {
+      transform: translateY(-5px);
+    }
+
+    .ad img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .ad h3 {
+      margin: 0.5rem 0;
+    }
+
+    .ad p {
+      color: green;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .contact-btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .contact-btn:hover {
+      background: var(--secondary);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      text-align: left;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+    }
+
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .close-modal {
+      float: right;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <h1>SellandBuy.com - Cars</h1>
+    <div class="nav-links">
+          <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/Homesite.html">Homesite</a>     
+          <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/sell.html">sell</a>
+        <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/anout%20us%20.html">About Us</a>
+         <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/contact%20us.html">Contact Us</a>
+
+    </div>
+  </nav>
+
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="Search cars..." />
+    <select id="priceFilter">
+      <option value="all">All Prices</option>
+      <option value="500000">Below ₹5,00,000</option>
+      <option value="1000000">Below ₹10,00,000</option>
+      <option value="2000000">Below ₹20,00,000</option>
+    </select>
+  </div>
+
+  <div class="ads" id="carAds">
+    <div class="ad" data-title="Honda City" data-price="500000">
+      <img src="https://www.mahindrafirstchoice.com/_next/image?url=https%3A%2F%2Fmedia.mahindrafirstchoice.com%2Flive_web_images%2Fusedcarsimg%2Fmfc%2F2886%2F586656%2Fleft_side_view-20230923124225.jpg&w=1920&q=50" />
+      <h3>Honda City</h3>
+      <p>Price: ₹5,00,000</p>
+      <button class="contact-btn" onclick="openModal('Honda City')">Contact Seller</button>
+    </div>
+
+    <div class="ad" data-title="Hyundai Creta" data-price="800000">
+      <img src="https://imgd.aeplcdn.com/300x225/vimages/202503/3882892_155218_1_1742372334850.jpg?q=80" />
+      <h3>Hyundai Creta</h3>
+      <p>Price: ₹8,00,000</p>
+      <button class="contact-btn" onclick="openModal('Hyundai Creta')">Contact Seller</button>
+    </div>
+
+    <div class="ad" data-title="Maruti Swift" data-price="300000">
+      <img src="https://imgd.aeplcdn.com/300x225/vimages/202501/3815480_150127_1_1738222382229.jpg?q=80" />
+      <h3>Maruti Swift</h3>
+      <p>Price: ₹3,00,000</p>
+      <button class="contact-btn" onclick="openModal('Maruti Swift')">Contact Seller</button>
+    </div>
+
+    <div class="ad" data-title="Tata Nexon" data-price="950000">
+      <img src="https://images10.gaadi.com/usedcar_image/4362215/original/processed_be5b6c5761872d660a4b6532fecced5c.jpg?imwidth=320" />
+      <h3>Tata Nexon</h3>
+      <p>Price: ₹9,50,000</p>
+      <button class="contact-btn" onclick="openModal('Tata Nexon')">Contact Seller</button>
+    </div>
+ <div class="ad" data-title="Ford" data-price="1050000">
+      <img src="https://imgd.aeplcdn.com/300x225/vimages/202504/3862197_140671_1_1743685744799.jpg?q=80" />
+      <h3>Ford</h3>
+      <p>Price: ₹10,50,000</p>
+      <button class="contact-btn" onclick="openModal('Ford')">Contact Seller</button>
+    </div>
+<div class="ad" data-title="toyota" data-price="1050000">
+      <img src="https://imgd.aeplcdn.com/300x225/vimages/202502/3855534_55217_1740727095384.jpeg?q=80" />
+      <h3>Ford</h3>
+      <p>Price: ₹15,55,000</p>
+      <button class="contact-btn" onclick="openModal('toyota')">Contact Seller</button>
+    </div>
+  </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="contactModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">×</span>
+      <h2>Contact Seller</h2>
+      <form id="contactForm">
+        <input type="text" id="buyerName" placeholder="Your Name" required />
+        <input type="email" id="buyerEmail" placeholder="Your Email" required />
+        <textarea id="buyerMessage" placeholder="Your Message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const priceFilter = document.getElementById("priceFilter");
+    const carAds = document.getElementById("carAds");
+    const allAds = Array.from(carAds.children);
+
+    function filterAds() {
+      const searchValue = searchInput.value.toLowerCase();
+      const priceLimit = priceFilter.value;
+
+      allAds.forEach(ad => {
+        const title = ad.getAttribute("data-title").toLowerCase();
+        const price = parseInt(ad.getAttribute("data-price"));
+
+        const matchesSearch = title.includes(searchValue);
+        const matchesPrice = priceLimit === "all" || price < parseInt(priceLimit);
+
+        ad.style.display = matchesSearch && matchesPrice ? "block" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", filterAds);
+    priceFilter.addEventListener("change", filterAds);
+
+    // Modal Functions
+    const modal = document.getElementById("contactModal");
+    const form = document.getElementById("contactForm");
+
+    function openModal(carName) {
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Message sent to the seller!");
+      form.reset();
+      closeModal();
+    });
+
+    window.onclick = function(event) {
+      if (event.target == modal) closeModal();
+    };
+  </script>
+
+</body>
+</html>

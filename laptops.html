@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SellandBuy.com - Laptops</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #4f46e5;
+      --green: #16a34a;
+      --bg: #f8fafc;
+      --text-dark: #0f172a;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: var(--bg);
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .search-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    .search-filter input, .search-filter select {
+      padding: 0.6rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      width: 250px;
+    }
+
+    .ads {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .ad {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .ad:hover {
+      transform: translateY(-5px);
+    }
+
+    .ad img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .ad h3 {
+      color: var(--text-dark);
+      font-size: 1.2rem;
+    }
+
+    .ad p {
+      color: var(--green);
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .contact-seller {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+      width: 100%;
+      font-weight: 600;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: var(--text-dark);
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .modal-content button {
+      background: var(--green);
+      color: white;
+      border: none;
+      padding: 0.7rem 1rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .close-modal {
+      float: right;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #dc2626;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar nav {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">SellandBuy.com</div>
+    <nav>
+           <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/Homesite.html">Homesite</a>      
+          <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/sell.html">sell</a>
+        <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/anout%20us%20.html">About Us</a>
+         <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/contact%20us.html">Contact Us</a>
+
+    </nav>
+  </header>
+
+  <section class="search-filter">
+    <input type="text" placeholder="Search laptops..." />
+    <select>
+      <option value="">Filter by Price</option>
+      <option value="0-30000">Under ₹30,000</option>
+      <option value="30000-60000">₹30,000 - ₹60,000</option>
+      <option value="60000+">Above ₹60,000</option>
+    </select>
+  </section>
+
+  <section class="ads">
+    <div class="ad">
+      <img src="https://img.cdnx.in/340080/WhatsAppImage2024-09-09at52355PM-1725892858542.jpeg?width=600&format=webp" />
+      <h3>Dell laptop</h3>
+      <p>Price: ₹45,000</p>
+      <button class="contact-seller" onclick="openModal('Dell laptop')">Contact Seller</button>
+    </div>
+    <div class="ad">
+      <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg" alt="MacBook Air" />
+      <h3>MacBook Air M1</h3>
+      <p>Price: ₹89,999</p>
+      <button class="contact-seller" onclick="openModal('MacBook Air M1')">Contact Seller</button>
+    </div>
+    <div class="ad">
+      <img src="https://images.jdmagicbox.com/quickquotes/images_main/hp-pavilion-x360-second-hand-laptop-12th-gen-intel-core-i5-1235u-8gb-sdram-256gb-ssd-iw3lxs1b.jpg"/>
+      <h3>HP Pavilion x360</h3>
+      <p>Price: ₹60,000</p>
+      <button class="contact-seller" onclick="openModal('HP Pavilion x360')">Contact Seller</button>
+    </div>
+    <div class="ad">
+      <img src="https://m.media-amazon.com/images/I/71L2XGT059L.jpg" />
+      <h3>Lenovo IdeaPad Slim 3</h3>
+      <p>Price: ₹39,999</p>
+      <button class="contact-seller" onclick="openModal('Lenovo IdeaPad Slim 3')">Contact Seller</button>
+    </div>
+   <div class="ad">
+      <img src="https://images.jdmagicbox.com/quickquotes/images_main/asus-second-hand-laptop-384092154-52k0g.jpeg" />
+      <h3>Asus Laptop</h3>
+      <p>Price: ₹39,999</p>
+      <button class="contact-seller" onclick="openModal('Asus Latop')">Contact Seller</button>
+    </div>
+   <div class="ad">
+      <img src="https://razacomputers.in/wp-content/uploads/2024/07/HP-14-bs730TU.jpeg" />
+      <h3>HP 14</h3>
+      <p>Price: ₹39,999</p>
+      <button class="contact-seller" onclick="openModal('HP 14')">Contact Seller</button>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="contactModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">×</span>
+      <h2>Contact Seller</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("contactModal");
+
+    function openModal(productName) {
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+</html>

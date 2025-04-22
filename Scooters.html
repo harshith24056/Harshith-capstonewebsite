@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SellandBuy.com - Scooters</title>
+  <style>
+    :root {
+      --primary: #a855f7;
+      --secondary: #9333ea;
+      --accent: #dc2626;
+      --bg: #f9f5ff;
+      --dark: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: var(--bg);
+    }
+
+    nav {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    nav h1 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    nav .links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-weight: bold;
+    }
+
+    .search-filter {
+      text-align: center;
+      padding: 2rem 1rem 0;
+    }
+
+    .search-filter input,
+    .search-filter select {
+      padding: 0.6rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin: 0.5rem;
+      width: 200px;
+    }
+
+    .ads {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .ad {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+      text-align: center;
+    }
+
+    .ad:hover {
+      transform: translateY(-5px);
+    }
+
+    .ad img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .ad h3 {
+      margin: 0.8rem 0 0.4rem;
+      font-size: 1.2rem;
+      color: var(--dark);
+    }
+
+    .ad p {
+      color: green;
+      font-weight: bold;
+    }
+
+    .contact-seller {
+      margin-top: 1rem;
+      background: var(--secondary);
+      color: white;
+      padding: 0.7rem;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .contact-seller:hover {
+      opacity: 0.9;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .modal-content button {
+      background: var(--primary);
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav .links {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <nav>
+    <h1>SellandBuy - Scooters</h1>
+    <div class="links">
+       <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/Homesite.html">Homesite</a>      
+      <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/sell.html">Sell</a>
+      <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/anout%20us%20.html">About Us</a>
+      <a href="file:///C:/Users/nellu/OneDrive/%E6%96%87%E6%A1%A3/contact%20us.html">Contact Us</a>
+    </div>
+  </nav>
+
+  <div class="search-filter">
+    <input type="text" id="searchInput" placeholder="Search scooters...">
+    <select id="priceFilter">
+      <option value="">Filter by price</option>
+      <option value="40000-60000">₹40,000 - ₹60,000</option>
+      <option value="60000-80000">₹60,000 - ₹80,000</option>
+      <option value="80000">Above ₹80,000</option>
+    </select>
+  </div>
+
+  <div class="ads" id="adsContainer">
+    <div class="ad" data-price="50000">
+      <img src="https://www.buy2hands.com/wp-content/uploads/2022/11/Ola-S1-Pro.jpg">
+      <h3>Electric Scooter</h3>
+      <p>Price: ₹50,000</p>
+      <button class="contact-seller" onclick="openModal('Electric Scooter')">Contact Seller</button>
+    </div>
+    <div class="ad" data-price="85000">
+      <img src="https://content.jdmagicbox.com/rep/b2b/second-hand-scooter/second-hand-scooter-11.jpg">
+      <h3>Scooter</h3>
+      <p>Price: ₹85,000</p>
+      <button class="contact-seller" onclick="openModal('Scooter')">Contact Seller</button>
+    </div>
+    <div class="ad" data-price="75000">
+      <img src="https://www.buy2hands.com/wp-content/uploads/2022/11/honda-activa-6g.png">
+      <h3>Honda Activa</h3>
+      <p>Price: ₹75,000</p>
+      <button class="contact-seller" onclick="openModal('Honda Activa')">Contact Seller</button>
+    </div>
+    <div class="ad" data-price="70000">
+      <img src="https://images.tv9hindi.com/wp-content/uploads/2021/12/Yamaha-Ray-ZR-125.jpg?q=50&w=1200">
+      <h3>Yamaha Scooter</h3>
+      <p>Price: ₹70,000</p>
+      <button class="contact-seller" onclick="openModal('Yamaha Scooter')">Contact Seller</button>
+    </div>
+    <div class="ad" data-price="55000">
+      <img src="https://images.credr.com/30262/1683717659592-1676958567371-CAP4632565566449188556.jpg">
+      <h3>Scooty Pep</h3>
+      <p>Price: ₹55,000</p>
+      <button class="contact-seller" onclick="openModal('Scooty Pep')">Contact Seller</button>
+    </div>
+    <div class="ad" data-price="60000">
+      <img src="https://imgd.aeplcdn.com/664x374/bikewaleimg/ec/484/img/l/hero-pleasure-side-7327.jpg?v=201711021421&q=80">
+      <h3>Hero Pleasure</h3>
+      <p>Price: ₹60,000</p>
+      <button class="contact-seller" onclick="openModal('Hero Pleasure')">Contact Seller</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h3>Contact Seller - <span id="itemName"></span></h3>
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea rows="3" placeholder="Your Message"></textarea>
+      <button onclick="closeModal()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal(name) {
+      document.getElementById("modal").style.display = "flex";
+      document.getElementById("itemName").textContent = name;
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    const searchInput = document.getElementById("searchInput");
+    const priceFilter = document.getElementById("priceFilter");
+    const adsContainer = document.getElementById("adsContainer");
+
+    searchInput.addEventListener("input", filterAds);
+    priceFilter.addEventListener("change", filterAds);
+
+    function filterAds() {
+      const searchText = searchInput.value.toLowerCase();
+      const selectedPrice = priceFilter.value;
+      const ads = adsContainer.querySelectorAll(".ad");
+
+      ads.forEach(ad => {
+        const title = ad.querySelector("h3").textContent.toLowerCase();
+        const price = parseInt(ad.dataset.price);
+
+        const matchesText = title.includes(searchText);
+        const matchesPrice = selectedPrice === "" || (
+          selectedPrice.includes("-") ?
+          price >= +selectedPrice.split("-")[0] && price <= +selectedPrice.split("-")[1] :
+          price > +selectedPrice
+        );
+
+        ad.style.display = matchesText && matchesPrice ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
